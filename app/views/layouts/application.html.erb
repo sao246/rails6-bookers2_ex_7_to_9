@@ -12,11 +12,7 @@
   <body>
      <%= render 'layouts/header' %>
       <main>
-        <% if !user_signed_in? && request.path != "/users/sign_up" %>
-          <%= render template: "devise/sessions/new" %>
-          <% else %>
-          <%= yield %>
-        <% end %>
+       <%= yield %>
         <p id="notice"><%= notice %></p>
       </main>
     <%= render partial: 'layouts/footer' %>
