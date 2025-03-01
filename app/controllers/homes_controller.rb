@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:about]
+  skip_before_action :authenticate_user!, only: [:about, :top]
   def top
   end
   

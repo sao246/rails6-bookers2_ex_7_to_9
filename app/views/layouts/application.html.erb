@@ -11,9 +11,10 @@
   </head>
   <body>
      <%= render 'layouts/header' %>
+     <p id="notice"><%= notice %></p>
       <main>
        <%= yield %>
-        <p id="notice"><%= notice %></p>
+        
       </main>
     <%= render partial: 'layouts/footer' %>
   </body>
