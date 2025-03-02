@@ -5,6 +5,7 @@ class Book < ApplicationRecord
   validates :body, presence: true, if: :editing?
   validates :body, length: { in: 0..200 }
   has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 
   def creating?
     new_record?
