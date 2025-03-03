@@ -12,6 +12,14 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show, :edit, :update]
   resources :relationships, only: [:create, :destroy]
+  resources :users do
+    member do
+      get :followers
+      get :following
+      post :follow
+      delete :unfollow
+    end
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

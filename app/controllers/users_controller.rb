@@ -24,6 +24,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers
+
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @following = @user.following
+
+  end
+
   private
 
   def user_params
@@ -35,5 +47,12 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to user_path(current_user)
     end
+  end
+
+  def store_location
+    session[:return_to] = request.referer if request.referer
+  end
+  def redirect_back_or_default
+    redirect_to(session[:return_to] || root_path)
   end
 end

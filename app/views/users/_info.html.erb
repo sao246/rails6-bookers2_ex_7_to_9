@@ -1,4 +1,5 @@
-<%= render 'layouts/errors', obj: user %><table class='table'>
+<%= render 'layouts/errors', obj: user %>
+<table class='table'>
   <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
   <tr>
 	  <th>name</th>
@@ -7,6 +8,26 @@
   <tr>
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
+  </tr>
+  <tr>
+    <th>follows</th>
+    <td><%= link_to user.following.count, following_user_path(user) %></td>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th><%= link_to user.followers.count, followers_user_path(user) %></td>
+  </tr>
+  <tr>
+    <th>
+      <% if current_user.id != user.id %>
+        <% if current_user.following?(user) %>
+          <%= link_to "フォロー外す", relationship_path(current_user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: "btn btn-info btn-sm" %>
+        <% else %>
+          <%= link_to "フォローする", relationships_path(followed_id: user.id), method: :post, class: "btn btn-success btn-sm" %>
+        <% end %>
+      <% end %>
+    </th>
+    <td></td>
   </tr>
 </table>
 
