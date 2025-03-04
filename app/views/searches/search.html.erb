@@ -13,7 +13,7 @@
           <tr>
             <td><%= image_tag book.user.get_profile_image, size:'50x50' %></td>
             <td><%= link_to book.title, book %></td>
-            <td><%= book.user.name %></td>
+            <td><%= book.body %></td>
           </tr>
         <% end %>
       </tbody>
