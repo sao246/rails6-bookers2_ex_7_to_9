@@ -7,51 +7,66 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Home
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to users_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i> Users
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to books_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-book-open"></i> Books
-            <% end %>
-          </li>
-          <li>
-            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> Log out
-            <% end %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Home
-            <% end %>
-          </li>
-          <li>
-            <%= link_to home_about_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-link"></i> About
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-user-plus"></i> Sign up
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-in-alt"></i> Log in
-            <% end %>
-          </li>
-        <% end %>
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li>
+              <%=  link_to users_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-users"></i> Users
+              <% end %>
+            </li>
+            <li>
+              <%=  link_to books_path ,class: 'nav-link text-light' do %>
+                <i class="fas fa-book-open"></i> Books
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt"></i> Log out
+              <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to root_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li>
+              <%= link_to home_about_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-link"></i> About
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-user-plus"></i> Sign up
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-in-alt"></i> Log in
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
   </nav>
+  <!--応用課題5　検索機能の実装-->
+  <div class="container" >
+    <div class="row">
+      <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6 m-2'>
+        <% if user_signed_in? %>
+          <%= form_with url: "/search", method: :get, local: true do |form| %>
+            <%= form.search_field :query %>
+            <%= form.select :category, [["Book", "books"], ["User", "users"]], include_blank: false %>
+            <%= form.select :method, options_for_select([["完全一致", "perfect"],["前方一致","forward"],["後方一致", "backward"],["部分一致","partial"]]) %>
+            <%= form.submit "検索" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </header>

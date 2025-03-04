@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/search'
   get 'relationships/create'
   get 'relationships/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       delete :unfollow
     end
   end
+  get "/search", to: "searches#search"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

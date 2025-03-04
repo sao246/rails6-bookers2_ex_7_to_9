@@ -1,0 +1,49 @@
+  <% if @books.present? %>
+    <h4>Books search for "<%= params[:query] %>"</h4>
+    <% @books.each do |book| %>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><%= image_tag book.user.get_profile_image, size:'50x50' %></td>
+          <td><%= link_to book.title, book %></td>
+          <td><%= book.user.name %></td>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% if @users.present? %>
+    <h5>Users search for "<%= params[:query] %>"</h5>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= image_tag user.get_profile_image, size:'50x50' %></td>
+            <td><%= user.name %></td>
+            <td>フォロー数： <%= user.following.count %></td>
+            <td>フォロワー数： <%= user.followers.count %></td>
+            <td><%= link_to "Show", user %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <% if @books.empty? && @users.empty? %>
+    <p>該当するデータがありません</p>
+  <% end%>
