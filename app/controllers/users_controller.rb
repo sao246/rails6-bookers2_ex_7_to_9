@@ -35,7 +35,6 @@ class UsersController < ApplicationController
   end
 
   private
-
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
@@ -45,12 +44,5 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to user_path(current_user)
     end
-  end
-
-  def store_location
-    session[:return_to] = request.referer if request.referer
-  end
-  def redirect_back_or_default
-    redirect_to(session[:return_to] || root_path)
   end
 end
