@@ -1,14 +1,19 @@
 <h1>Follower Users</h1>
 
 <ul>
-    <% if @followers.count == 0 %>
-      ユーザーがいません。
-    <% else %>
+  <% if @followers.empty? %>
+    ユーザーがいません。
+  <% else %>
+    <table class = 'table' >
       <% @followers.each do |follower| %>
-        <%= image_tag follower.get_profile_image, size:'100x100' %>
-        <p>フォロー数：<% follower.user.following.count %></p>
-        <p>フォロワー数：<%= follower.followers.count %></p>
-      <%= link_to "Show", follower.name, follower %>
-    <% end %>
+        <tr>
+          <td><%= image_tag follower.get_profile_image, size:'100x100' %></td>
+          <td><%= follower.name %></td>
+          <td><p>フォロー数： <%= follower.following.count %></p></td>
+          <td><p>フォロワー数： <%= follower.followers.count %></p></td>
+          <td><%= link_to "Show", follower %></td>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
 </ul>

@@ -1,14 +1,19 @@
 <h1>Follow Users</h1>
 
 <ul>
-  <% @following.each do |following| %>
-     <% if following.count == 0 %>
-      ユーザーがいません。
-    <% else %>
-      <%= image_tag following.get_profile_image, size:'100x100' %>
-        <%= link_to following.name, following %>
-        <%= link_to following.user.followers.count, following %>
-      フォロワー数：<%= link_to follower.followers.count, follower %>
-    <% end %>
+  <% if @following.empty? %>
+    ユーザーがいません。
+  <% else %>
+    <table class='table'>
+      <% @following.each do |following| %>
+      <tr>
+        <td><%= image_tag following.get_profile_image, size:'100x100' %></td>
+        <td><%= following.name %></td>
+        <td><p>フォロー数： <%= following.following.count %></p></td>
+        <td><p>フォロワー数： <%= following.followers.count %></p></td>
+        <td><%= link_to "Show", following %></td>
+      </tr>
+      <% end %>
+    </table>
   <% end %>
 </ul>
