@@ -16,3 +16,6 @@ import "../stylesheets/application"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+//= requrie jquery
+//= require rails-ujs
