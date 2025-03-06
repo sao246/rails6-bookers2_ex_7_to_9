@@ -6,7 +6,7 @@ class BookCommentsController < ApplicationController
   
     if @book_comment.save
       respond_to do |format|
-        format.js  # create.js.erb を呼び出す
+        format.js
       end
     else
       respond_to do |format|
@@ -22,7 +22,7 @@ class BookCommentsController < ApplicationController
     @book_comment.destroy
   
     respond_to do |format|
-      format.js  # destroy.js.erb を呼び出す
+      format.js
     end
   end
 
