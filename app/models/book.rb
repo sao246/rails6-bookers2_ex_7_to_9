@@ -29,9 +29,4 @@ class Book < ApplicationRecord
       .group(:id)
       .order('COUNT(favorites.id) DESC')
   }
-
-
-
-
-
 end
