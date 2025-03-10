@@ -21,12 +21,10 @@ class Book < ApplicationRecord
 
   #基準日から1週間分のいいね数を集計するためのメソッド
   scope :by_weekly_favorites_count, -> {
-    start_date = Date.current.beginning_of_week
-    end_date = Date.current.end_of_week
 
     left_joins(:favorites)
-      .where(favorites: { created_at: start_date..end_date }).or(where(favorites:{ id: nil }))
       .group(:id)
+      .select('books.*, COUNT(favorites.id) AS favorites_count')
       .order('COUNT(favorites.id) DESC')
   }
 end
