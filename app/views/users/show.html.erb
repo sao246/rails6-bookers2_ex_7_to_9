@@ -8,13 +8,17 @@
     </div>
 <% unless @user.id == current_user.id %>
   <% if (current_user.followed_by?(@user)) && (@user.followed_by?(current_user)) %> 
+      <p>ロジックに入れる</p>
     <% if @isRoom == true %>
+    <p>ボタンが表示される</p>
       <p class= "user-show-room"><a href="/rooms/<%= @roomId %>" class = "btn btn-primary btl-lg">チャットへ</a>
     <% else %>
       <% form_for @room do |f| %>
         <% fields_for @entry do |e| %>
           <% e.hidden_field :user_id, value: @user.id %>
+              <p>ボタンが表示されない</p>
         <% end %>
+        <p>ロジックに入れない</p>
         <% f.submit "チャットを始める", class: "btn btn-primary btn-lg user-show-chat" %>
       <% end %>
     <% end %>

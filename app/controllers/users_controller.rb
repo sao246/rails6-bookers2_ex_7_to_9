@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
+    @isRoom = false
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
@@ -21,6 +22,11 @@ class UsersController < ApplicationController
       else
         @room = Room.new
         @entry = Entry.new
+      end
+      unless @isRoom 
+        @room = Room.create!
+        Entry.create!(user_id: current_user.id, room_id: @room.id)
+        Entry.create!(user_id: @user.id, room_id: @room.id)
       end
     end
   end
