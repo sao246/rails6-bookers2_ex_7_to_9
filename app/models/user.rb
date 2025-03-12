@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def unfollow(other_user)
     following.delete(other_user)
   end
+
+  def followed_by?(user)
+    followers.exists?(user.id)
+  end
 end
