@@ -3,10 +3,10 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @room = Room.create
-    @entry1 = Entry.create(room_id: @room.id, user_id: current_user.id)
-    @entry2 = Entry.create(params.require(:entry).permit(:user_id, :room_id).merge(room_id: @room.id))
-    redirect_to "/rooms/#{@room.id}"
+    room = Room.create
+    entry1 = Entry.create(room_id: room.id, user_id: current_user.id)
+    entry2 = Entry.create(params.require(:entry).permit(:user_id, :room_id).merge(room_id: room.id))
+    redirect_to "/rooms/#{room.id}"
   end
   
   def show
@@ -14,7 +14,8 @@ class RoomsController < ApplicationController
     if Entry.where(user_id: current_user.id, room_id: @room.id).present?
       @message = @room.messages
       @message = Message.new
-      @entries = @room.entries      
+      @entries = @room.entries
+      @messages = @room.messages.order(:created_at)
     else
       redirect_back(fallback_location: root_path)
     end
