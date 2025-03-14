@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
 
   def follow(other_user)
     following << other_user unless self == other_user

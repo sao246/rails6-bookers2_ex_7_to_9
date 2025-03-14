@@ -6,7 +6,8 @@ class Book < ApplicationRecord
   validates :body, length: { in: 0..200 }
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
-
+  has_many :view_counts, dependent: :destroy
+  
   def creating?
     new_record?
   end
