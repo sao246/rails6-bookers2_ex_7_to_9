@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :view_counts, dependent: :destroy
 
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
+
   def follow(other_user)
     following << other_user unless self == other_user
   end
